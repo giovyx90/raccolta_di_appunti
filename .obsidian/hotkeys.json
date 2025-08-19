@@ -1,0 +1,36 @@
+{
+  "workspace:new-tab": [],
+  "markdown:toggle-preview": [],
+  "templater-obsidian:create-30. Risorse/31. Templates/Sezione Teorica.md": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "S"
+    }
+  ],
+  "templater-obsidian:30. Risorse/31. Templates/Sezione Teorica.md": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "S"
+    }
+  ],
+  "templater-obsidian:30. Risorse/31. Templates/Esercizio.md": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "E"
+    }
+  ],
+  "templater-obsidian:30. Risorse/31. Templates/Argomento di Teoria.md": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "T"
+    }
+  ]
+}

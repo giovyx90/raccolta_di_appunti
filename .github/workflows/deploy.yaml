@@ -3,7 +3,7 @@ name: Deploy Quartz site to GitHub Pages
 on:
   push:
     branches:
-      - main  # o v4 se usi quel branch
+      - v4  # o v4 se usi quel branch
   workflow_dispatch:  # Permette di eseguire manualmente
 
 permissions:

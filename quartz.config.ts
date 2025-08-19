@@ -3,8 +3,9 @@ import * as Plugin from "./quartz/plugins"
 
 /**
  * Quartz 4 Configuration
- *
- * See https://quartz.jzhao.xyz/configuration for more information.
+ * Nota: KaTeX attivo con macro personalizzate in fondo (Plugin.Latex).
+ * - Callout support: ObsidianFlavoredMarkdown è dopo SyntaxHighlighting.
+ * - Ricorda: i blocchi $$ vanno su righe dedicate (niente testo sulla stessa riga).
  */
 const config: QuartzConfig = {
   configuration: {
@@ -66,12 +67,50 @@ const config: QuartzConfig = {
         },
         keepBackground: false,
       }),
+      // Obsidian-flavored Markdown (callout inclusi) dopo SyntaxHighlighting
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
-      Plugin.Latex({ renderEngine: "katex" }),
+
+      // --- LaTeX: KaTeX + macro utili per Algebra Lineare / Geometria ---
+      Plugin.Latex({
+        renderEngine: "katex",
+        macros: {
+          // Insiemi e calligrafici
+          "\\RR": "\\mathbb{R}",
+          "\\CC": "\\mathbb{C}",
+          "\\QQ": "\\mathbb{Q}",
+          "\\ZZ": "\\mathbb{Z}",
+          "\\NN": "\\mathbb{N}",
+          "\\HH": "\\mathbb{H}",
+          "\\LL": "\\mathcal{L}",
+
+          // Operatori standard (compatibili con i tuoi snippet)
+          "\\Span": "\\operatorname{span}",
+          "\\Ker": "\\operatorname{Ker}",
+          "\\Im": "\\operatorname{Im}",
+          "\\rank": "\\operatorname{rank}",
+          "\\tr": "\\operatorname{tr}",
+          "\\Re": "\\mathrm{Re}",
+          "\\ImPart": "\\mathrm{Im}",
+
+          // Scorciatoie comuni
+          "\\vect": ["\\mathbf{#1}", 1],
+          "\\abs": ["\\left\\lvert #1 \\right\\rvert", 1],
+          "\\norm": ["\\left\\lVert #1 \\right\\rVert", 1],
+          "\\set": ["\\left\\{ #1 \\right\\}", 1],
+          "\\ang": ["\\left\\langle #1 \\right\\rangle", 1],
+
+          // Frecce e mappe comode
+          "\\to": "\\rightarrow",
+          "\\map": "\\mapsto",
+
+          // Matrici: evita macro con \\begin... nella definizione (KaTeX è più felice senza)
+          // usa direttamente \begin{bmatrix} ... \end{bmatrix} dagli snippet
+        },
+      }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
@@ -88,7 +127,7 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
+      // Disabilita se vuoi build più rapidi
       Plugin.CustomOgImages(),
     ],
   },
